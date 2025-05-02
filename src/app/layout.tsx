@@ -11,6 +11,7 @@ import {
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Button } from '~/components/ui/button';
 import { ToastProvider } from '~/context/ToastContext';
+import { QueryProvider } from '~/context/QueryContext';
 import '../styles/globals.css';
 
 const geistSans = Geist({
@@ -37,20 +38,22 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <html lang="sr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ToastProvider>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton>
-                <Button className="cursor-pointer">Uloguj se</Button>
-              </SignInButton>
-              <SignUpButton>
-                <Button className="cursor-pointer">Registruj se</Button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton/>
-            </SignedIn>
-          </header>
-          {children}
+          <QueryProvider>
+            <header className="flex justify-end items-center p-4 gap-4 h-16">
+              <SignedOut>
+                <SignInButton>
+                  <Button className="cursor-pointer">Uloguj se</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button className="cursor-pointer">Registruj se</Button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton/>
+              </SignedIn>
+            </header>
+            {children}
+          </QueryProvider>
         </ToastProvider>
       </body>
       </html>

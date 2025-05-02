@@ -1,10 +1,9 @@
 'use client';
 
 import { type FormEvent, useEffect, useMemo, useState } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
-import useSWRMutation from 'swr/mutation';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { CalendarIcon, Gift, Trash2 } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card';
@@ -15,8 +14,9 @@ import { Calendar } from '~/components/ui/calendar';
 import { cn } from '~/lib/utils';
 import { useToast } from '~/context/ToastContext';
 import { LoadingSpinner } from '~/components/ui/Spinner';
+import BirthdayList from '~/components/BirthdayList';
 
-type Birthday = {
+export type Birthday = {
   id: string
   name: string
   date: Date | string
@@ -50,9 +50,19 @@ async function submitForm(url: string, { arg }: { arg: { name: string; date: str
 
 export default function BirthdayTracker() {
   const { showSuccessToast, showErrorToast } = useToast();
-  const { data, isLoading, error } = useSWR<Birthday[]>('/api/birthdays', fetcher);
-  const { trigger, isMutating } = useSWRMutation('/api/birthdays', submitForm);
-  const { mutate } = useSWRConfig();
+  const queryClient = useQueryClient();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['birthdays'],
+    queryFn: () => fetcher('/api/birthdays')
+  });
+
+  const { mutate: addBirthday, isPending: isMutating } = useMutation({
+    mutationFn: (newBirthday: { name: string; date: string }) => submitForm('/api/birthdays', { arg: newBirthday }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['birthdays'] });
+    }
+  });
 
   const [name, setName] = useState('');
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -65,7 +75,7 @@ export default function BirthdayTracker() {
   }, [error, showErrorToast]);
 
   const birthdays = useMemo(() => {
-    return data?.map(b => ({ ...b, date: new Date(b.date), })) || [];
+    return data?.map((b: Birthday) => ({ ...b, date: new Date(b.date), })) || [];
   }, [data]);
 
   async function handleSubmit(e: FormEvent) {
@@ -83,9 +93,8 @@ export default function BirthdayTracker() {
     }
 
     try {
-      await trigger({ name, date: date.toISOString() });
+      addBirthday({ name, date: date.toISOString() });
       showSuccessToast('Birthday added!');
-      await mutate('/api/birthdays');
 
       setName('');
       setDate(undefined);
@@ -170,24 +179,14 @@ export default function BirthdayTracker() {
               ? <p className="text-center text-muted-foreground py-6">No birthdays added yet. Add one above!</p>
               : (
                 <ul className="space-y-3">
-                  {birthdays.map((birthday) => (
-                    <li key={birthday.id} className="flex items-center justify-between p-3 rounded-lg border">
-                      <div className="flex items-center gap-3">
-                        <Gift className="h-5 w-5 text-pink-500"/>
-                        <div>
-                          <p className="font-medium">{birthday.name}</p>
-                          <p className="text-sm text-muted-foreground">{formatBirthday(birthday.date)}</p>
-                        </div>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => deleteBirthday(birthday.id)}
-                        disabled={isLoading}
-                      >
-                        <Trash2 className="h-4 w-4 text-muted-foreground"/>
-                      </Button>
-                    </li>
+                  {birthdays.map((birthday: Birthday & { date: Date; }) => (
+                    <BirthdayList
+                      key={birthday.id}
+                      birthday={birthday}
+                      deleteBirthday={deleteBirthday}
+                      formatBirthday={formatBirthday}
+                      isLoading={isLoading}
+                    />
                   ))}
                 </ul>
               )}
