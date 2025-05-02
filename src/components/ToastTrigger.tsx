@@ -1,24 +1,16 @@
 'use client';
 
-import { toast } from 'sonner';
 import { useEffect } from 'react';
+import { useToast } from '~/context/ToastContext';
 
-type ToastTriggerProps = {
-  message: string;
-  description?: string;
-  type?: 'error' | 'success';
-}
+export default function ToastTrigger({ error }: { error: string | undefined }) {
+  const { showErrorToast } = useToast();
 
-export function ToastTrigger({ message, description, type = 'error' }: ToastTriggerProps) {
   useEffect(() => {
-    if (type === 'error') {
-      toast.error(message, { description });
-    } else if (type === 'success') {
-      toast.success(message, { description });
-    } else {
-      toast(message, { description });
+    if (error) {
+      showErrorToast(error);
     }
-  }, [message, description, type]);
+  }, [error, showErrorToast]);
 
   return null;
 }

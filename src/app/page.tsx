@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
-
-import { useState } from 'react';
+import { type FormEvent, useEffect, useMemo, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { format } from 'date-fns';
@@ -15,8 +13,7 @@ import { Label } from '~/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { Calendar } from '~/components/ui/calendar';
 import { cn } from '~/lib/utils';
-import { Toaster } from '~/components/ui/sonner';
-import { toast } from 'sonner';
+import { useToast } from '~/context/ToastContext';
 import { LoadingSpinner } from '~/components/ui/Spinner';
 
 type Birthday = {
@@ -28,10 +25,6 @@ type Birthday = {
 async function fetcher(url: string) {
   const res = await fetch(url);
   if (!res.ok) {
-    toast.error('Uh oh! Something went wrong.', {
-      description: 'Please try again later.',
-    });
-
     const errorData = await res.json();
     throw new Error(errorData.message || 'Failed to retrieve data.');
   }
@@ -48,10 +41,6 @@ async function submitForm(url: string, { arg }: { arg: { name: string; date: str
   });
 
   if (!response.ok) {
-    toast.error('Something went wrong while adding the birthday.', {
-      description: 'Please try again later.',
-    });
-
     const errorData = await response.json();
     throw new Error(errorData.message || 'Failed to submit form');
   }
@@ -60,7 +49,8 @@ async function submitForm(url: string, { arg }: { arg: { name: string; date: str
 }
 
 export default function BirthdayTracker() {
-  const { data, isLoading } = useSWR<Birthday[]>('/api/birthdays', fetcher);
+  const { showSuccessToast, showErrorToast } = useToast();
+  const { data, isLoading, error } = useSWR<Birthday[]>('/api/birthdays', fetcher);
   const { trigger, isMutating } = useSWRMutation('/api/birthdays', submitForm);
   const { mutate } = useSWRConfig();
 
@@ -68,11 +58,17 @@ export default function BirthdayTracker() {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [validationError, setValidationError] = useState<string>('');
 
+  useEffect(() => {
+    if (error) {
+      showErrorToast('Uh oh! Something went wrong.', 'Please try again later.');
+    }
+  }, [error, showErrorToast]);
+
   const birthdays = useMemo(() => {
     return data?.map(b => ({ ...b, date: new Date(b.date), })) || [];
   }, [data]);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setValidationError('');
 
@@ -87,12 +83,15 @@ export default function BirthdayTracker() {
     }
 
     try {
-      await trigger({ name, date: date.toISOString() }).then(() => {
-        toast.success('Birthday added!');
-      });
+      await trigger({ name, date: date.toISOString() });
+      showSuccessToast('Birthday added!');
       await mutate('/api/birthdays');
 
+      setName('');
+      setDate(undefined);
+
     } catch (error: Error | unknown) {
+      showErrorToast('Something went wrong while adding the birthday.', 'Please try again later.');
       return error;
     }
   }
@@ -112,7 +111,6 @@ export default function BirthdayTracker() {
   return (
     <div className="container mx-auto py-10 max-w-3xl">
       <h1 className="text-3xl font-bold text-center mb-8">Birthday Tracker</h1>
-      <Toaster richColors/>
       <div className="grid gap-8">
         <Card>
           <CardHeader>

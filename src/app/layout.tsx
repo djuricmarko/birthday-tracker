@@ -10,6 +10,7 @@ import {
 } from '@clerk/nextjs';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Button } from '~/components/ui/button';
+import { ToastProvider } from '~/context/ToastContext';
 import '../styles/globals.css';
 
 const geistSans = Geist({
@@ -25,6 +26,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Rođendanko',
   description: 'Prati rođendane svojih voljenih i nikad ih ne zaboravite.',
+  icons: {
+    icon: '/favicon.ico',
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -32,20 +36,22 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <ClerkProvider>
       <html lang="sr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <header className="flex justify-end items-center p-4 gap-4 h-16">
-        <SignedOut>
-          <SignInButton>
-            <Button className="cursor-pointer">Uloguj se</Button>
-          </SignInButton>
-          <SignUpButton>
-            <Button className="cursor-pointer">Registruj se</Button>
-          </SignUpButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton/>
-        </SignedIn>
-      </header>
-      {children}
+        <ToastProvider>
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <SignedOut>
+              <SignInButton>
+                <Button className="cursor-pointer">Uloguj se</Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button className="cursor-pointer">Registruj se</Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton/>
+            </SignedIn>
+          </header>
+          {children}
+        </ToastProvider>
       </body>
       </html>
     </ClerkProvider>
