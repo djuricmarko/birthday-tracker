@@ -11,18 +11,12 @@ export default async function TestPage() {
 
     const posts = await response.json();
 
-    if (!Array.isArray(posts)) {
-      throw new Error('Received invalid data format from API.');
-    }
-
-    const typedPosts = posts as { id: string; title: string; }[];
-
     return (
       <div>
         <h1>Blog Posts</h1>
-        {typedPosts.length === 0 ? <p>No posts found.</p> : (
+        {posts?.length === 0 ? <p>No posts found.</p> : (
           <ul>
-            {typedPosts.map((post) => (
+            {posts?.map((post: { id: string; title: string; }) => (
               <li key={post.id}>{post.title}</li>
             ))}
           </ul>
@@ -30,17 +24,6 @@ export default async function TestPage() {
       </div>
     );
   } catch (error) {
-    let errorMessage = 'An unknown error occurred';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    } else if (typeof error === 'string') {
-      errorMessage = error;
-    }
-
-    return (
-      <div>
-        <ToastTrigger error={errorMessage}/>
-      </div>
-    );
+    return <ToastTrigger error={(error as Error).message || 'An unknown error occurred'}/>;
   }
 }
