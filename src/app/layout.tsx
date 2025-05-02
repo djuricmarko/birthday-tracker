@@ -10,7 +10,7 @@ import {
 } from '@clerk/nextjs';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Button } from '~/components/ui/button';
-import './globals.css';
+import '../styles/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
