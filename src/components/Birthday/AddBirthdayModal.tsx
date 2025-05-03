@@ -61,12 +61,17 @@ export function AddBirthdayModal() {
     }
 
     try {
-      addBirthday({ name, date: date.toISOString() });
-      showSuccessToast('Birthday added!');
+      addBirthday({ name, date: date.toISOString() }, {
+        onSuccess: () => {
+          setName('');
+          setDate(undefined);
 
-      setName('');
-      setDate(undefined);
-
+          showSuccessToast('Birthday added!');
+        },
+        onError: () => {
+          showErrorToast('Something went wrong while adding the birthday.', 'Please try again later.');
+        },
+      });
     } catch (error: Error | unknown) {
       showErrorToast('Something went wrong while adding the birthday.', 'Please try again later.');
       return error;
