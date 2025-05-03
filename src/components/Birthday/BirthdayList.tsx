@@ -1,12 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Gift, Trash2 } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { format } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { LoadingSpinner } from '~/components/ui/Spinner';
+import { useToast } from '~/context/ToastContext';
 
 type Birthday = {
   id: string
@@ -24,10 +25,18 @@ async function fetcher(url: string) {
 }
 
 export function BirthdayList() {
-  const { data, isLoading } = useQuery({
+  const { showErrorToast } = useToast();
+
+  const { data, isLoading, error } = useQuery({
     queryKey: ['birthdays'],
     queryFn: () => fetcher('/api/birthdays')
   });
+
+  useEffect(() => {
+    if (error) {
+      showErrorToast(error.message || 'An unknown error occurred');
+    }
+  }, [error, showErrorToast]);
 
   const birthdays = useMemo(() => {
     return data?.map((b: Birthday) => ({ ...b, date: new Date(b.date), })) || [];
