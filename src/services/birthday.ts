@@ -1,8 +1,8 @@
 import 'server-only';
 
+import { eq } from 'drizzle-orm';
 import { db, birthdays } from '~/lib/db';
 import type { Birthday } from '~/types/birthdayTypes';
-import { eq } from 'drizzle-orm';
 
 /**
  * Fetches all birthdays from the database.
