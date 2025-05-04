@@ -2,9 +2,8 @@
 
 import { useActionState, useEffect, useState } from 'react';
 import { addBirthdayAction } from '~/app/actions';
-import { cn } from '~/lib/utils';
+import { cn, formatBirthday } from '~/lib/utils';
 import { CalendarIcon } from 'lucide-react';
-import { format } from 'date-fns';
 import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 import { Label } from '~/components/ui/label';
@@ -31,14 +30,6 @@ export function AddBirthdayForm() {
       }
     }
   }, [state, showSuccessToast, showErrorToast]);
-
-  function formatBirthday(date: Date | string) {
-    const dateObject = typeof date === 'string' ? new Date(date) : date;
-    if (isNaN(dateObject.getTime())) {
-      return 'Invalid Date';
-    }
-    return format(dateObject, 'MMMM d, yyyy');
-  }
 
   return (
     <form action={formAction} className="space-y-4">
