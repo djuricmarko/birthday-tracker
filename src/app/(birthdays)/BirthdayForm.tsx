@@ -49,7 +49,7 @@ export function AddBirthdayForm() {
               disabled={isPending}
             >
               <CalendarIcon className="mr-2 h-4 w-4"/>
-              {date ? formatBirthday(date) : 'Select date'}
+              {date ? formatBirthday(date) : 'Izaberi datum'}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
