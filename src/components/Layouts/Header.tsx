@@ -4,7 +4,7 @@ import { Button } from '~/components/ui/button';
 export default function Header() {
   return (
     <header className="h-[60px] bg-gray-100">
-      <div className="container mx-auto flex justify-between items-center gap-4 h-full">
+      <div className="container mx-auto flex justify-between items-center gap-4 h-full px-5">
         <h1 className="font-bold uppercase">Rođendanko</h1>
         <div className="flex gap-4">
           <SignedOut>
