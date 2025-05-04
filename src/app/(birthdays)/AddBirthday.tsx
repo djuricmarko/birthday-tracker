@@ -39,7 +39,7 @@ async function submitForm(url: string, { arg }: { arg: { name: string; date: str
   return response.json();
 }
 
-export function AddDialog() {
+export function AddBirthday() {
   const { showSuccessToast, showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -146,7 +146,7 @@ export function AddDialog() {
           {validationError && <p className="text-sm text-red-500">{validationError}</p>}
           <DialogFooter>
             <Button type="submit" className="w-full mt-5" disabled={isMutating}>
-              {isMutating ? <LoadingSpinner/> : 'Add Birthday'}
+              {isMutating ? <LoadingSpinner/> : 'Dodaj'}
             </Button>
           </DialogFooter>
         </form>
