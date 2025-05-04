@@ -2,6 +2,7 @@ import 'server-only';
 
 import { db, birthdays } from '~/lib/db';
 import type { Birthday } from '~/types/birthdayTypes';
+import { eq } from 'drizzle-orm';
 
 /**
  * Fetches all birthdays from the database.
@@ -32,8 +33,9 @@ async function addBirthday(birthday: Omit<Birthday, 'id'>) {
  * @returns A promise that resolves to the id of the deleted birthday record
  */
 async function deleteBirthday(id: string) {
-  console.log('Deleting birthday with id:', id);
-  return id;
+  const [deletedBirthday] = await db.delete(birthdays).where(eq(birthdays.id, id)).returning({ id: birthdays.id });
+
+  return deletedBirthday?.id;
 }
 
 export {

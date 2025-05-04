@@ -1,14 +1,14 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { addBirthday } from '~/services/birthday';
+import { addBirthday, deleteBirthday } from '~/services/birthday';
 
 interface FormState {
   message: string;
   success: boolean;
 }
 
-export async function addBirthdayAction(
+async function addBirthdayAction(
   prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
@@ -20,7 +20,7 @@ export async function addBirthdayAction(
   }
 
   try {
-    await addBirthday({ name, date })
+    await addBirthday({ name, date });
     revalidatePath('/');
 
     return { message: 'Birthday added successfully!', success: true };
@@ -29,3 +29,17 @@ export async function addBirthdayAction(
     return { message: 'Failed to add birthday.', success: false };
   }
 }
+
+async function deleteBirthdayAction(id: string): Promise<FormState> {
+  try {
+    await deleteBirthday(id);
+    revalidatePath('/');
+
+    return { message: 'Birthday deleted successfully!', success: true };
+  } catch (error) {
+    console.error('Error deleting birthday:', error);
+    return { message: 'Failed to delete birthday.', success: false };
+  }
+}
+
+export { addBirthdayAction, deleteBirthdayAction };
