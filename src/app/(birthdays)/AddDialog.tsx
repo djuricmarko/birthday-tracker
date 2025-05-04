@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader, DialogOverlay,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '~/components/ui/dialog';
@@ -133,9 +133,13 @@ export function AddDialog() {
                   {date ? formatBirthday(date) : 'Select date'}
                 </Button>
               </PopoverTrigger>
-
               <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={date} onSelect={setDate} initialFocus disabled={isMutating}/>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={isMutating}
+                />
               </PopoverContent>
             </Popover>
           </div>

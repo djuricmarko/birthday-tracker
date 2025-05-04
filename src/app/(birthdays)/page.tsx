@@ -8,10 +8,9 @@ export default async function BirthdayTracker() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full pt-10">
-      <h1 className="text-3xl font-bold text-center mb-8">Birthday Tracker</h1>
       <div className="grid gap-8 w-full px-5 max-w-[500px]">
-        <AddDialog/>
         <BirthdayList birthdays={birthdays as Birthday[]}/>
+        <AddDialog/>
       </div>
     </div>
   );
