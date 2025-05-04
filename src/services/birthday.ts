@@ -9,7 +9,6 @@ import type { Birthday } from '~/types/birthdayTypes';
  */
 export async function getBirthdays(): Promise<{ birthdays: Birthday[] }> {
   const birthdayRecords = await db.select().from(birthdays);
-  console.log(birthdayRecords);
 
   return {
     birthdays: birthdayRecords as Birthday[]

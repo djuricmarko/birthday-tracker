@@ -23,8 +23,8 @@ export function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Upcoming birthdays</CardTitle>
-        <CardDescription>All the birthdays you&#39;re tracking.</CardDescription>
+        <CardTitle>Predostojeći rođendani</CardTitle>
+        <CardDescription>Rođendani koje ti pratiš</CardDescription>
       </CardHeader>
       <CardContent>
         {birthdays.length === 0

@@ -1,17 +1,25 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader, DialogOverlay,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog';
+import { Button } from '~/components/ui/button';
 import { Label } from '~/components/ui/label';
 import { Input } from '~/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
-import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, PlusIcon } from 'lucide-react';
 import { Calendar } from '~/components/ui/calendar';
 import { LoadingSpinner } from '~/components/ui/Spinner';
+import { useToast } from '~/components/context/ToastContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type FormEvent, useState } from 'react';
-import { useToast } from '~/context/ToastContext';
 import { format } from 'date-fns';
 
 async function submitForm(url: string, { arg }: { arg: { name: string; date: string } }) {
@@ -31,7 +39,7 @@ async function submitForm(url: string, { arg }: { arg: { name: string; date: str
   return response.json();
 }
 
-export function AddBirthdayModal() {
+export function AddDialog() {
   const { showSuccessToast, showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -87,26 +95,33 @@ export function AddBirthdayModal() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Add a Birthday</CardTitle>
-        <CardDescription>Enter the name and birthday of someone you want to remember.</CardDescription>
-      </CardHeader>
-      <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="cursor-pointer flex w-fit">
+          <PlusIcon className="h-5 w-5"/>
+          Dodaj rođendan
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Dodaj rođendan</DialogTitle>
+          <DialogDescription>
+            Unesite ime i datum rođendana
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
-              placeholder="Enter name"
+              placeholder="Unesite ime"
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={isMutating}
             />
           </div>
-
           <div className="space-y-2">
-            <Label htmlFor="date">Birthday</Label>
+            <Label htmlFor="date">Rođendan</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -118,20 +133,20 @@ export function AddBirthdayModal() {
                   {date ? formatBirthday(date) : 'Select date'}
                 </Button>
               </PopoverTrigger>
+
               <PopoverContent className="w-auto p-0">
                 <Calendar mode="single" selected={date} onSelect={setDate} initialFocus disabled={isMutating}/>
               </PopoverContent>
             </Popover>
           </div>
-
           {validationError && <p className="text-sm text-red-500">{validationError}</p>}
-        </CardContent>
-        <CardFooter>
-          <Button type="submit" className="w-full mt-5" disabled={isMutating}>
-            {isMutating ? <LoadingSpinner/> : 'Add Birthday'}
-          </Button>
-        </CardFooter>
-      </form>
-    </Card>
+          <DialogFooter>
+            <Button type="submit" className="w-full mt-5" disabled={isMutating}>
+              {isMutating ? <LoadingSpinner/> : 'Add Birthday'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
