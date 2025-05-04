@@ -20,14 +20,10 @@ export function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
     return format(dateObject, 'MMMM d, yyyy');
   }
 
-  async function deleteBirthday(id: string) {
-    console.warn(`Deletion for ID ${id} is local only. Implement API call.`);
-  }
-
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Birthday List</CardTitle>
+        <CardTitle>Upcoming birthdays</CardTitle>
         <CardDescription>All the birthdays you&#39;re tracking.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -44,11 +40,7 @@ export function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
                       <p className="text-sm text-muted-foreground">{formatBirthday(birthday.date)}</p>
                     </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => deleteBirthday(birthday.id)}
-                  >
+                  <Button variant="ghost" size="icon">
                     <Trash2 className="h-4 w-4 text-muted-foreground"/>
                   </Button>
                 </li>
