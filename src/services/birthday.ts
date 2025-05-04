@@ -20,9 +20,10 @@ async function getBirthdays(): Promise<{ birthdays: Birthday[] }> {
  * @param birthday - The birthday object to be added
  * @returns A promise that resolves to the added Birthday object
  */
-async function addBirthday(birthday: Birthday) {
-  console.log('Adding birthday:', birthday);
-  return birthday;
+async function addBirthday(birthday: Omit<Birthday, 'id'>) {
+  const [newBirthday] = await db.insert(birthdays).values({ name: birthday.name, date: birthday.date }).returning();
+
+  return newBirthday as Birthday;
 }
 
 /**
