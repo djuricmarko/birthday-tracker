@@ -38,8 +38,8 @@ export function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Predostojeći rođendani</CardTitle>
-        <CardDescription>Rođendani koje ti pratiš</CardDescription>
+        <CardTitle>Upcoming birthdays</CardTitle>
+        <CardDescription>Birthdays you are following</CardDescription>
       </CardHeader>
       <CardContent>
         {birthdays.length === 0
