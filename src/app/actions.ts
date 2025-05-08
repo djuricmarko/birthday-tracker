@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { addBirthday, deleteBirthday } from '~/services/birthday';
+import { auth } from '@clerk/nextjs/server';
 
 interface FormState {
   message: string;
@@ -12,6 +13,12 @@ async function addBirthdayAction(
   prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  const { userId } = await auth()
+
+  if (!userId) {
+    return { message: 'You must be signed in to add an item to your cart', success: false };
+  }
+
   const name = formData.get('name') as string;
   const date = formData.get('date') as string;
 
@@ -20,7 +27,7 @@ async function addBirthdayAction(
   }
 
   try {
-    await addBirthday({ name, date });
+    await addBirthday({ name, date, userId });
     revalidatePath('/');
 
     return { message: 'Birthday added successfully!', success: true };
