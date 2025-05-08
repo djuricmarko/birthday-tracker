@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Rođendanko',
-  description: 'Prati rođendane svojih voljenih i nikad ih ne zaboravite.',
+  title: 'Birthday Tracker',
+  description: 'Track the birthdays of your loved ones and never forget them.',
   icons: {
     icon: '/favicon.ico',
   }

@@ -1,15 +1,21 @@
 import 'server-only';
 
 import { eq } from 'drizzle-orm';
-import { db, birthdays } from '~/lib/db';
-import type { Birthday } from '~/types/birthdayTypes';
+import { db, birthdays, type NewBirthday, type Birthday } from '~/lib/db';
+import { auth } from '@clerk/nextjs/server';
 
 /**
  * Fetches all birthdays from the database.
  * @returns A promise that resolves to an array of Birthday objects.
  */
 async function getBirthdays(): Promise<{ birthdays: Birthday[] }> {
-  const birthdayRecords = await db.select().from(birthdays);
+  const { userId } = await auth();
+
+  if (!userId) {
+    return { birthdays: [] };
+  }
+
+  const birthdayRecords = await db.select().from(birthdays).where(eq(birthdays.userId, userId));
 
   return {
     birthdays: birthdayRecords as Birthday[]
@@ -21,8 +27,12 @@ async function getBirthdays(): Promise<{ birthdays: Birthday[] }> {
  * @param birthday - The birthday object to be added
  * @returns A promise that resolves to the added Birthday object
  */
-async function addBirthday(birthday: Omit<Birthday, 'id'>) {
-  const [newBirthday] = await db.insert(birthdays).values({ name: birthday.name, date: birthday.date }).returning();
+async function addBirthday(birthday: Omit<NewBirthday, 'id'>) {
+  const [newBirthday] = await db.insert(birthdays).values({
+    name: birthday.name,
+    date: birthday.date,
+    userId: birthday.userId
+  }).returning();
 
   return newBirthday as Birthday;
 }

@@ -10,6 +10,7 @@ import { Label } from '~/components/ui/label';
 import { useToast } from '~/components/context/ToastContext';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { Calendar } from '~/components/ui/calendar';
+import { LoadingSpinner } from '~/components/ui/Spinner';
 
 const initialState = {
   message: '',
@@ -34,12 +35,12 @@ export function AddBirthdayForm() {
   return (
     <form action={formAction} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="name">Ime</Label>
-        <Input id="name" name="name" placeholder="Unesite ime" required/>
+        <Label htmlFor="name">Name</Label>
+        <Input id="name" name="name" placeholder="Enter name" required/>
       </div>
       <div className="space-y-2">
-        <input type="hidden" name="date" value={date ? date.toISOString() : ''} />
-        <Label htmlFor="date-display">Rođendan</Label>
+        <input type="hidden" name="date" value={date ? date.toISOString() : ''}/>
+        <Label htmlFor="date-display">Birthday</Label>
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -49,7 +50,7 @@ export function AddBirthdayForm() {
               disabled={isPending}
             >
               <CalendarIcon className="mr-2 h-4 w-4"/>
-              {date ? formatBirthday(date) : 'Izaberi datum'}
+              {date ? formatBirthday(date) : 'Select date'}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
@@ -62,11 +63,9 @@ export function AddBirthdayForm() {
           </PopoverContent>
         </Popover>
       </div>
-      {!state.success && state.message && (
-        <p className="text-sm text-red-500">{state.message}</p>
-      )}
+      {!state.success && state.message && <p className="text-sm text-red-500">{state.message}</p>}
       <Button className="cursor-pointer w-full" variant="outline" type="submit" disabled={isPending}>
-        {isPending ? 'Dodajem...' : 'Dodaj'}
+        {isPending ? <LoadingSpinner/> : 'Add birthday'}
       </Button>
     </form>
   );

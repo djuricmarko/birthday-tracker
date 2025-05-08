@@ -7,6 +7,7 @@ export const birthdays = pgTable('birthdays', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   date: date('date'),
+  userId: uuid('userId').notNull(),
 });
 
 export const db = drizzle(neon(process.env.POSTGRES_URL!));
