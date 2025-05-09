@@ -6,7 +6,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Button } from '~/components/ui/button';
 import { Skeleton } from '~/components/ui/Skeleton';
 
-const afacad = Afacad();
+const afacad = Afacad({ subsets: ['latin'] });
 
 async function Header() {
   const user = await currentUser();
