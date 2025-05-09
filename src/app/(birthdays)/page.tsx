@@ -8,29 +8,25 @@ import { auth } from '@clerk/nextjs/server';
 import { LoadingSpinner } from '~/components/ui/Spinner';
 
 export default async function BirthdayTracker() {
-  const { birthdays } = await getBirthdays();
   const { userId } = await auth();
-
-  if (!userId) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
-        <h1>Login first</h1>
-      </div>
-    );
-  }
+  const { birthdays } = userId ? await getBirthdays(userId) : { birthdays: [] };
 
   return (
     <div className="flex flex-col justify-center items-center w-full pt-10">
-      <div className="grid gap-8 w-full px-5 max-w-[500px]">
-        <Suspense fallback={<LoadingSpinner className="justify-self-center"/>}>
-          <BirthdayList birthdays={birthdays as Birthday[]}/>
-        </Suspense>
-        <Link href="/add" className="justify-self-center">
-          <Button className="w-40 cursor-pointer" variant="outline">
-            Add
-          </Button>
-        </Link>
-      </div>
+      {!userId
+        ? <h1>Login first</h1>
+        : (
+          <div className="grid gap-8 w-full px-5 max-w-[500px]">
+            <Suspense fallback={<LoadingSpinner className="justify-self-center"/>}>
+              <BirthdayList birthdays={birthdays as Birthday[]}/>
+            </Suspense>
+            <Link href="/add" prefetch={true} className="justify-self-center">
+              <Button className="w-40 cursor-pointer" variant="outline">
+                Add
+              </Button>
+            </Link>
+          </div>
+        )}
     </div>
   );
 }
