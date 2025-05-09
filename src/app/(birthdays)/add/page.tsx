@@ -1,7 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AddBirthdayForm } from '~/app/(birthdays)/BirthdayForm';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '~/components/ui/button';
+
+export const metadata: Metadata = {
+  title: 'Add birthday',
+}
 
 function AddBirthdayPage() {
   return (

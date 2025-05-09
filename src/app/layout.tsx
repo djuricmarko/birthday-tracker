@@ -13,11 +13,11 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: 'Birthday Tracker',
+  title: {
+    default: 'Birthday Tracker',
+    template: '%s | Birthday Tracker',
+  },
   description: 'Track the birthdays of your loved ones and never forget them.',
-  icons: {
-    icon: '/favicon.ico',
-  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
