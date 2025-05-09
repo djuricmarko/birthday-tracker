@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Geist } from 'next/font/google';
 import { ToastProvider } from '~/components/context/ToastContext';
-import { QueryProvider } from '~/components/context/QueryContext';
 import { MainLayout } from '~/components/Layouts/MainLayout';
 import '../styles/globals.css';
 
@@ -26,11 +25,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <html lang="sr">
       <body className={`${geistSans.className} antialiased`}>
       <ToastProvider>
-        <QueryProvider>
-          <MainLayout>
-            {children}
-          </MainLayout>
-        </QueryProvider>
+        <MainLayout>
+          {children}
+        </MainLayout>
       </ToastProvider>
       </body>
       </html>
