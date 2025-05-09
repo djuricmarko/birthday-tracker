@@ -2,19 +2,12 @@ import 'server-only';
 
 import { eq } from 'drizzle-orm';
 import { db, birthdays, type NewBirthday, type Birthday } from '~/lib/db';
-import { auth } from '@clerk/nextjs/server';
 
 /**
  * Fetches all birthdays from the database.
  * @returns A promise that resolves to an array of Birthday objects.
  */
-async function getBirthdays(): Promise<{ birthdays: Birthday[] }> {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return { birthdays: [] };
-  }
-
+async function getBirthdays(userId: string): Promise<{ birthdays: Birthday[] }> {
   const birthdayRecords = await db.select().from(birthdays).where(eq(birthdays.userId, userId));
 
   return {
