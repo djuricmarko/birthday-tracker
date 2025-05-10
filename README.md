@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Birthday Tracker
 
-## Getting Started
+A modern web application that helps you keep track of important birthdays. Never forget a birthday again!
 
-First, run the development server:
+## Description
+
+Birthday Tracker is a Next.js application that allows users to:
+- Create an account and log in securely using Clerk authentication
+- Add birthdays with names and dates
+- View a list of saved birthdays
+- Get reminders for upcoming birthdays
+
+The application is built with modern web technologies and provides a clean, responsive user interface.
+
+## Technologies Used
+
+- **Frontend**: Next.js 15, React 19, TailwindCSS
+- **Authentication**: Clerk
+- **Database**: NeonDB (PostgreSQL) with Drizzle ORM
+- **UI Components**: shadcn/ui, Radix UI, React Day Picker
+- **Build Tools**: TurboRepo
+
+## Prerequisites
+
+Before running this project, you need to have:
+
+- Node.js (latest LTS version recommended)
+- pnpm package manager
+- Clerk account for authentication
+- NeonDB account for database (or another PostgreSQL database)
+
+## Environment Setup
+
+1. Clone the repository
+2. Copy `.env.example` to `.env.local` and fill in the required environment variables:
+   ```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   ```
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running the Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Development mode with TurboPack
+pnpm dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Build for production
+pnpm build
 
-## Learn More
+# Start production server
+pnpm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **User Authentication**: Secure login and registration with Clerk
+- **Birthday Management**: Add and view birthdays
+- **Responsive Design**: Works on desktop and mobile devices
+- **Modern UI**: Clean and intuitive user interface
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
