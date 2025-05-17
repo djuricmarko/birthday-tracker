@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="sr">
+      <html lang="en">
       <body className={`${geistSans.className} antialiased`}>
       <ToastProvider>
         <MainLayout>
