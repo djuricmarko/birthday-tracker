@@ -16,7 +16,6 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      captionLayout="dropdown"
       className={cn('p-3', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row',
