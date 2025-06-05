@@ -16,7 +16,7 @@ const birthdaySchema = z.object({
     (date) => !isNaN(new Date(date).getTime()),
     { message: 'Invalid date format' }
   ),
-  userId: z.string().uuid({ message: 'Valid user ID is required' })
+  userId: z.string({ message: 'Valid user ID is required' })
 });
 
 async function addBirthdayAction(
