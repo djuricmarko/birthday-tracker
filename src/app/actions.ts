@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { addBirthday, deleteBirthday } from '~/services/birthday';
 import { auth } from '@clerk/nextjs/server';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 interface FormState {
   message: string;
@@ -11,11 +11,8 @@ interface FormState {
 }
 
 const birthdaySchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  date: z.string().min(1, { message: 'Date is required' }).refine(
-    (date) => !isNaN(new Date(date).getTime()),
-    { message: 'Invalid date format' }
-  ),
+  name: z.string().min(1, { error: 'Name is required' }),
+  date: z.string().min(1, { error: 'Date is required' }),
   userId: z.string({ message: 'Valid user ID is required' })
 });
 
@@ -35,7 +32,7 @@ async function addBirthdayAction(
   const validationResult = birthdaySchema.safeParse({ name, date, userId });
 
   if (!validationResult.success) {
-    const errorMessage = validationResult.error.errors[0]?.message || 'Invalid input data';
+    const errorMessage = validationResult.error.issues.map(issue => issue.message).join(', ');
     return { message: errorMessage, success: false };
   }
 
