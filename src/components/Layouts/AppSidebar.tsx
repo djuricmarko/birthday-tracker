@@ -12,7 +12,6 @@ import {
 } from '~/components/ui/sidebar';
 import { Disc2 } from 'lucide-react';
 import { AppSidebarMenu } from './AppSidebarMenu';
-import { AppSidebarFooter } from './AppSidebarFooter';
 
 function AppSidebar() {
   return (
