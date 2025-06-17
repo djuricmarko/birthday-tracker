@@ -10,7 +10,7 @@ import { Label } from '~/components/ui/label';
 import { useToast } from '~/components/context/ToastContext';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { Calendar } from '~/components/ui/calendar';
-import { LoadingSpinner } from '~/components/ui/Spinner';
+import { LoadingSpinner } from '~/components/ui/spinner';
 
 const initialState = {
   message: '',

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Geist } from 'next/font/google';
 import { ToastProvider } from '~/components/context/ToastContext';
-import { MainLayout } from '~/components/Layouts/MainLayout';
+import { MainLayout } from '~/components/layouts/MainLayout';
 import '../styles/globals.css';
 
 const geistSans = Geist({
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
       <body className={`${geistSans.className} antialiased`}>
       <ToastProvider>

@@ -1,25 +1,22 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Afacad } from 'next/font/google';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 import { currentUser } from '@clerk/nextjs/server';
-import { Button } from '~/components/ui/button';
-import { Skeleton } from '~/components/ui/Skeleton';
 
-const afacad = Afacad({ subsets: ['latin'] });
+import { Button } from '~/components/ui/button';
+import { SidebarTrigger } from '~/components/ui/sidebar';
+import { Skeleton } from '~/components/ui/skeleton';
 
 async function Header() {
   const user = await currentUser();
 
   return (
-    <header className="h-[60px] bg-gray-100">
-      <div className="container mx-auto flex justify-between items-center gap-4 h-full px-5">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo.svg" alt="Logo" width={50} height={50}/>
-          <h1 className={`sm:block hidden ${afacad.className} text-[#fe6f55] text-xl`}>
-            Birthday tracker
+    <header className="h-[50px] border-b border-[#F3F3F3]">
+      <div className="flex justify-between items-center gap-4 h-full px-5">
+        <div className="flex items-center gap-4">
+          <SidebarTrigger/>
+          <h1 className={`sm:block hidden`}>
+            Birthdays
           </h1>
-        </Link>
+        </div>
         <div className="flex gap-4 items-center">
           <SignedOut>
             <SignInButton>
@@ -38,7 +35,6 @@ async function Header() {
           </SignedIn>
         </div>
       </div>
-      <hr className="border-b border-gray-200"/>
     </header>
   );
 }
