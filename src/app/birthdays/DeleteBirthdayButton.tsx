@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useToast } from '~/components/context/ToastContext';
 import { deleteBirthdayAction } from '~/app/actions';
 import { Button } from '~/components/ui/button';
-import { LoadingSpinner } from '~/components/ui/Spinner';
+import { LoadingSpinner } from '~/components/ui/spinner';
 import { Trash2 } from 'lucide-react';
 
 function DeleteBirthday({ id }: { id: string }) {

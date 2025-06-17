@@ -21,7 +21,7 @@ function AppSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/">
+                <Link href="/birthdays">
                   <Disc2/>
                   <span>Birthday Tracker</span>
                 </Link>

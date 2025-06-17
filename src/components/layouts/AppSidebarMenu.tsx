@@ -9,7 +9,7 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '~/components/ui
 const items = [
   {
     title: 'Birthdays',
-    url: '/',
+    url: '/birthdays',
     icon: NotebookText,
   },
   {

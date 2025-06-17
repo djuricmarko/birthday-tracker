@@ -1,9 +1,17 @@
 import type { ReactNode } from 'react';
+import { auth } from '@clerk/nextjs/server';
+
 import { Header } from './Header';
 import { AppSidebar } from './AppSidebar';
 import { SidebarProvider } from '~/components/ui/sidebar';
 
-export function MainLayout({ children }: { children: ReactNode }) {
+export async function MainLayout({ children }: { children: ReactNode }) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return children;
+  }
+
   return (
     <SidebarProvider>
       <div className="flex w-full">
