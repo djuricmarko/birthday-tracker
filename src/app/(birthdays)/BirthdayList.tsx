@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { Gift } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { formatBirthday } from '~/lib/utils';
-import { DeleteBirthday } from '~/app/(birthdays)/DeleteBirthdayButton';
+import { DeleteBirthday } from './DeleteBirthdayButton';
 
 function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
   const formattedBirthdays = useMemo(() => {
