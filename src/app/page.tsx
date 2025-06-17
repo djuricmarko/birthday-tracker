@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 import { Cake, Calendar } from 'lucide-react';
@@ -119,16 +120,18 @@ async function HomePage() {
                 )}
                 style={{ animationDelay: '0.4s' }}
               >
-                <Button
-                  size="lg"
-                  className={cn(
-                    primaryButtonGradient,
-                    'text-white px-8 py-4 text-lg rounded-full',
-                    'shadow-lg hover:shadow-xl transition-all duration-300 hover-scale'
-                  )}
-                >
-                  Start Tracking Birthdays
-                </Button>
+                <Link href="/birthdays" passHref>
+                  <Button
+                    size="lg"
+                    className={cn(
+                      primaryButtonGradient,
+                      'text-white px-8 py-4 text-lg rounded-full',
+                      'shadow-lg hover:shadow-xl transition-all duration-300 hover-scale'
+                    )}
+                  >
+                    Start Tracking Birthdays
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   size="lg"
