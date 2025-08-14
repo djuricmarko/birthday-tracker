@@ -1,4 +1,4 @@
-import type { Birthday } from '~/types/birthdayTypes';
+import type { Birthday } from '~/lib/db';
 import { useMemo } from 'react';
 import { Gift } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
@@ -7,7 +7,7 @@ import { DeleteBirthday } from './DeleteBirthdayButton';
 
 function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
   const formattedBirthdays = useMemo(() => {
-    return birthdays?.map((b: Birthday) => ({ ...b, date: new Date(b.date), })) || [];
+    return birthdays ?? [];
   }, [birthdays]);
 
   return (
@@ -27,7 +27,7 @@ function BirthdayList({ birthdays }: { birthdays: Birthday[] }) {
                     <Gift className="h-5 w-5 text-pink-500"/>
                     <div>
                       <p className="font-medium">{birthday.name}</p>
-                      <p className="text-sm text-muted-foreground">{formatBirthday(birthday.date)}</p>
+                      <p className="text-sm text-muted-foreground">{formatBirthday(birthday.date ?? '')}</p>
                     </div>
                   </div>
                   <DeleteBirthday id={birthday.id}/>

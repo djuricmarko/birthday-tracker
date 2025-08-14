@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import type { Birthday } from '~/types/birthdayTypes';
+import type { Birthday } from '~/lib/db';
 import { BirthdayList } from '~/app/birthdays/BirthdayList';
 import { getBirthdays } from '~/services/birthday';
 import { Button } from '~/components/ui/button';
