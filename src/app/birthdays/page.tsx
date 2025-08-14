@@ -12,17 +12,18 @@ export default async function BirthdayTracker() {
   const { birthdays } = userId ? await getBirthdays(userId) : { birthdays: [] };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full pt-10">
-      <div className="grid gap-8 w-full px-5 max-w-[500px]">
-        <Suspense fallback={<LoadingSpinner className="justify-self-center"/>}>
-          <BirthdayList birthdays={birthdays as Birthday[]}/>
-        </Suspense>
+    <div className="flex flex-col justify-center items-center w-full p-4 gap-4">
+      <div className="w-full flex justify-between items-center">
+        <h3>Birthdays you follow</h3>
         <Link href="/birthdays/add" prefetch={true} className="justify-self-center">
           <Button className="w-40 cursor-pointer" variant="outline">
             Add
           </Button>
         </Link>
       </div>
+      <Suspense fallback={<LoadingSpinner className="justify-self-center" />}>
+        <BirthdayList birthdays={birthdays as Birthday[]} />
+      </Suspense>
     </div>
   );
 }
