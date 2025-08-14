@@ -1,10 +1,11 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
+import { auth } from '@clerk/nextjs/server';
+import { Plus } from 'lucide-react';
 import type { Birthday } from '~/lib/db';
 import { BirthdayList } from '~/app/birthdays/BirthdayList';
 import { getBirthdays } from '~/services/birthday';
 import { Button } from '~/components/ui/button';
-import { auth } from '@clerk/nextjs/server';
 import { LoadingSpinner } from '~/components/ui/spinner';
 
 export default async function BirthdayTracker() {
@@ -17,7 +18,8 @@ export default async function BirthdayTracker() {
         <h3>Birthdays you follow</h3>
         <Link href="/birthdays/add" prefetch={true} className="justify-self-center">
           <Button className="w-40 cursor-pointer" variant="outline">
-            Add
+            <Plus className="mr-2 h-4 w-4" />
+            Add birthday
           </Button>
         </Link>
       </div>
