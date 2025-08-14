@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { auth } from '@clerk/nextjs/server';
-import { Plus } from 'lucide-react';
+import { ListFilter, Plus } from 'lucide-react';
 import type { Birthday } from '~/lib/db';
 import { BirthdayList } from '~/app/birthdays/BirthdayList';
 import { getBirthdays } from '~/services/birthday';
@@ -16,12 +16,17 @@ export default async function BirthdayTracker() {
   return (
     <div className="flex flex-col justify-center items-center w-full p-4 gap-4">
       <div className="w-full flex justify-between items-center">
-        <Tabs defaultValue="all">
-          <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex items-center gap-4">
+          <Tabs defaultValue="all">
+            <TabsList>
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Button variant="outline" className="cursor-pointer">
+            <ListFilter className="h-4 w-4" />
+          </Button>
+        </div>
         <Link href="/birthdays/add" prefetch={true} className="justify-self-center">
           <Button className="w-36 cursor-pointer" variant="outline">
             <Plus className="mr-2 h-4 w-4" />
