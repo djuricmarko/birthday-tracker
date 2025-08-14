@@ -7,6 +7,7 @@ import { BirthdayList } from '~/app/birthdays/BirthdayList';
 import { getBirthdays } from '~/services/birthday';
 import { Button } from '~/components/ui/button';
 import { LoadingSpinner } from '~/components/ui/spinner';
+import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 
 export default async function BirthdayTracker() {
   const { userId } = await auth();
@@ -15,9 +16,14 @@ export default async function BirthdayTracker() {
   return (
     <div className="flex flex-col justify-center items-center w-full p-4 gap-4">
       <div className="w-full flex justify-between items-center">
-        <h3>Birthdays you follow</h3>
+        <Tabs defaultValue="all">
+          <TabsList>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+          </TabsList>
+        </Tabs>
         <Link href="/birthdays/add" prefetch={true} className="justify-self-center">
-          <Button className="w-40 cursor-pointer" variant="outline">
+          <Button className="w-36 cursor-pointer" variant="outline">
             <Plus className="mr-2 h-4 w-4" />
             Add birthday
           </Button>
