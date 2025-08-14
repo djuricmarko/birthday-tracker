@@ -18,7 +18,7 @@ export async function MainLayout({ children }: { children: ReactNode }) {
         <AppSidebar/>
         <div className="flex flex-col w-full">
           <Header/>
-          <main className="container mx-auto h-[calc(100vh-60px)]">
+          <main className="h-[calc(100vh-50px)]">
             {children}
           </main>
         </div>

@@ -1,16 +1,17 @@
 'use client';
 
 import { useActionState, useEffect, useState } from 'react';
-import { addBirthdayAction } from '~/app/actions';
-import { cn, formatBirthday } from '~/lib/utils';
+import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import { Input } from '~/components/ui/input';
-import { Button } from '~/components/ui/button';
-import { Label } from '~/components/ui/label';
+import { addBirthdayAction } from '~/app/actions';
 import { useToast } from '~/components/context/ToastContext';
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
+import { Button } from '~/components/ui/button';
 import { Calendar } from '~/components/ui/calendar';
+import { Input } from '~/components/ui/input';
+import { Label } from '~/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
 import { LoadingSpinner } from '~/components/ui/spinner';
+import { cn, formatBirthday } from '~/lib/utils';
 
 const initialState = {
   message: '',
@@ -39,7 +40,7 @@ export function AddBirthdayForm() {
         <Input id="name" name="name" placeholder="Enter name" required/>
       </div>
       <div className="space-y-2">
-        <input type="hidden" name="date" value={date ? date.toISOString() : ''}/>
+        <input type="hidden" name="date" value={date ? format(date, 'yyyy-MM-dd') : ''}/>
         <Label htmlFor="date-display">Birthday</Label>
         <Popover>
           <PopoverTrigger asChild>

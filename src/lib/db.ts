@@ -4,14 +4,16 @@ import { neon } from '@neondatabase/serverless';
 import { pgTable, text, date, uuid } from 'drizzle-orm/pg-core';
 import { env } from '~/env';
 
-export const birthdays = pgTable('birthdays', {
+const birthdays = pgTable('birthdays', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   date: date('date'),
   userId: uuid('userId').notNull(),
 });
 
-export const db = drizzle(neon(env.POSTGRES_URL));
+const db = drizzle(neon(env.POSTGRES_URL));
 
-export type Birthday = typeof birthdays.$inferSelect;
-export type NewBirthday = typeof birthdays.$inferInsert;
+type Birthday = typeof birthdays.$inferSelect;
+type NewBirthday = typeof birthdays.$inferInsert;
+
+export { db, birthdays, type Birthday, type NewBirthday };

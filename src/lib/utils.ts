@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,7 +12,17 @@ function cn(...inputs: ClassValue[]) {
  * @returns {string} The formatted date string or 'Invalid Date' if the input is invalid
  */
 function formatBirthday(date: Date | string): string {
-  const dateObject = typeof date === 'string' ? new Date(date) : date;
+  let dateObject: Date;
+  if (typeof date === 'string') {
+    // Handle pure date strings (YYYY-MM-DD) as local dates to avoid timezone shifts
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      dateObject = parse(date, 'yyyy-MM-dd', new Date());
+    } else {
+      dateObject = new Date(date);
+    }
+  } else {
+    dateObject = date;
+  }
   if (isNaN(dateObject.getTime())) {
     return 'Invalid Date';
   }
