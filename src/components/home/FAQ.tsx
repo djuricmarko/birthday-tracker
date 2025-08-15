@@ -3,43 +3,43 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
+const faqs = [
+  {
+    question: 'How does BirthdayTracker sync with my existing calendar?',
+    answer: 'BirthdayTracker seamlessly integrates with Google Calendar, Outlook, Apple Calendar, and other popular calendar apps. Simply connect your account and all birthdays will automatically appear in your calendar with customizable reminders.'
+  },
+  {
+    question: 'Can I share birthday lists with family members?',
+    answer: 'Yes! With our Pro plan, you can create family groups and share birthday lists with other members. Everyone in the group can add, edit, and receive notifications for shared birthdays, making coordination effortless.'
+  },
+  {
+    question: 'What types of reminders can I set?',
+    answer: 'You can set multiple reminders for each birthday - from weeks in advance to the day of. Choose from email, SMS, push notifications, and in-app alerts. Customize timing, frequency, and message content for each reminder.'
+  },
+  {
+    question: 'How does the AI gift suggestion feature work?',
+    answer: 'Our AI analyzes the person\'s age, interests, past gift history, and current trends to suggest personalized gift ideas. You can also save gift ideas throughout the year and track what you\'ve given in previous years.'
+  },
+  {
+    question: 'Is my data secure and private?',
+    answer: 'Absolutely. We use enterprise-grade encryption for all data transmission and storage. Your contacts and personal information are never shared with third parties. You can export your data anytime and delete your account whenever you want.'
+  },
+  {
+    question: 'Can I use BirthdayTracker offline?',
+    answer: 'Yes! Our mobile app works offline and syncs when you\'re back online. You can view birthdays, add new ones, and receive reminders even without an internet connection.'
+  },
+  {
+    question: 'What\'s included in the free plan?',
+    answer: 'The free plan includes tracking up to 50 birthdays, basic email reminders, mobile app access, and simple gift tracking. It\'s perfect for personal use and includes all core features you need.'
+  },
+  {
+    question: 'How do I import birthdays from other apps?',
+    answer: 'BirthdayTracker supports importing from CSV files, Google Contacts, Facebook birthdays, and most other birthday apps. Our import wizard makes the process simple and ensures no birthdays are lost in the transition.'
+  }
+];
+
 function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqs = [
-    {
-      question: 'How does BirthdayTracker sync with my existing calendar?',
-      answer: 'BirthdayTracker seamlessly integrates with Google Calendar, Outlook, Apple Calendar, and other popular calendar apps. Simply connect your account and all birthdays will automatically appear in your calendar with customizable reminders.'
-    },
-    {
-      question: 'Can I share birthday lists with family members?',
-      answer: 'Yes! With our Pro plan, you can create family groups and share birthday lists with other members. Everyone in the group can add, edit, and receive notifications for shared birthdays, making coordination effortless.'
-    },
-    {
-      question: 'What types of reminders can I set?',
-      answer: 'You can set multiple reminders for each birthday - from weeks in advance to the day of. Choose from email, SMS, push notifications, and in-app alerts. Customize timing, frequency, and message content for each reminder.'
-    },
-    {
-      question: 'How does the AI gift suggestion feature work?',
-      answer: 'Our AI analyzes the person\'s age, interests, past gift history, and current trends to suggest personalized gift ideas. You can also save gift ideas throughout the year and track what you\'ve given in previous years.'
-    },
-    {
-      question: 'Is my data secure and private?',
-      answer: 'Absolutely. We use enterprise-grade encryption for all data transmission and storage. Your contacts and personal information are never shared with third parties. You can export your data anytime and delete your account whenever you want.'
-    },
-    {
-      question: 'Can I use BirthdayTracker offline?',
-      answer: 'Yes! Our mobile app works offline and syncs when you\'re back online. You can view birthdays, add new ones, and receive reminders even without an internet connection.'
-    },
-    {
-      question: 'What\'s included in the free plan?',
-      answer: 'The free plan includes tracking up to 50 birthdays, basic email reminders, mobile app access, and simple gift tracking. It\'s perfect for personal use and includes all core features you need.'
-    },
-    {
-      question: 'How do I import birthdays from other apps?',
-      answer: 'BirthdayTracker supports importing from CSV files, Google Contacts, Facebook birthdays, and most other birthday apps. Our import wizard makes the process simple and ensures no birthdays are lost in the transition.'
-    }
-  ];
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -71,8 +71,10 @@ function FAQ() {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index}
-                 className="bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-700 transition-all duration-200">
+            <div
+              key={index}
+              className="bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-700 transition-all duration-200"
+            >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-gray-900/50 transition-colors duration-200"

@@ -2,29 +2,29 @@ import { Calendar, Mail, Phone, MapPin, Twitter, Github, Linkedin, Youtube } fro
 
 function Footer() {
   const socialLinks = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Youtube, href: "#", label: "YouTube" }
+    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Youtube, href: '#', label: 'YouTube' },
   ];
 
   const footerSections = [
     {
-      title: "Product",
-      links: ["Features", "Pricing", "Security", "Updates", "Mobile App"]
+      title: 'Product',
+      links: ['Features', 'Pricing', 'Security', 'Updates', 'Mobile App'],
     },
     {
-      title: "Support",
-      links: ["Help Center", "Contact Us", "API Docs", "System Status", "Bug Reports"]
+      title: 'Support',
+      links: ['Help Center', 'Contact Us', 'API Docs', 'System Status', 'Bug Reports'],
     },
     {
-      title: "Company",
-      links: ["About Us", "Blog", "Careers", "Press Kit", "Partners"]
+      title: 'Company',
+      links: ['About Us', 'Blog', 'Careers', 'Press Kit', 'Partners'],
     },
     {
-      title: "Legal",
-      links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR", "Licenses"]
-    }
+      title: 'Legal',
+      links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR', 'Licenses'],
+    },
   ];
 
   return (

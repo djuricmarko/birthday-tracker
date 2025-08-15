@@ -3,59 +3,59 @@ import { Check, Zap, Crown, Star } from 'lucide-react';
 function Pricing() {
   const plans = [
     {
-      name: "Free",
+      name: 'Free',
       price: 0,
-      period: "forever",
-      description: "Perfect for personal use",
+      period: 'forever',
+      description: 'Perfect for personal use',
       icon: Zap,
       features: [
-        "Up to 50 birthdays",
-        "Basic reminders",
-        "Mobile app access",
-        "Email notifications",
-        "Simple gift tracking"
+        'Up to 50 birthdays',
+        'Basic reminders',
+        'Mobile app access',
+        'Email notifications',
+        'Simple gift tracking',
       ],
-      buttonText: "Get Started",
-      popular: false
+      buttonText: 'Get Started',
+      popular: false,
     },
     {
-      name: "Pro",
+      name: 'Pro',
       price: 9.99,
-      period: "month",
-      description: "Best for families and groups",
+      period: 'month',
+      description: 'Best for families and groups',
       icon: Crown,
       features: [
-        "Unlimited birthdays",
-        "Advanced reminders",
-        "SMS notifications",
-        "AI gift suggestions",
-        "Family sharing",
-        "Calendar integration",
-        "Custom templates",
-        "Priority support"
+        'Unlimited birthdays',
+        'Advanced reminders',
+        'SMS notifications',
+        'AI gift suggestions',
+        'Family sharing',
+        'Calendar integration',
+        'Custom templates',
+        'Priority support',
       ],
-      buttonText: "Start Free Trial",
-      popular: true
+      buttonText: 'Start Free Trial',
+      popular: true,
     },
     {
-      name: "Enterprise",
+      name: 'Enterprise',
       price: 29.99,
-      period: "month",
-      description: "For organizations and teams",
+      period: 'month',
+      description: 'For organizations and teams',
       icon: Star,
       features: [
-        "Everything in Pro",
-        "Team management",
-        "Advanced analytics",
-        "Custom integrations",
-        "White-label options",
-        "Dedicated support",
-        "SSO authentication",
-        "API access"
+        'Everything in Pro',
+        'Team management',
+        'Advanced analytics',
+        'Custom integrations',
+        'White-label options',
+        'Dedicated support',
+        'SSO authentication',
+        'API access',
       ],
-      buttonText: "Contact Sales",
-      popular: false
-    }
+      buttonText: 'Contact Sales',
+      popular: false,
+    },
   ];
 
   return (

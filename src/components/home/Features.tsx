@@ -4,40 +4,40 @@ function Features() {
   const features = [
     {
       icon: Calendar,
-      title: "Smart Calendar Sync",
-      description: "Seamlessly integrates with your existing calendar apps. View all birthdays with beautiful visual indicators.",
-      image: "https://images.pexels.com/photos/7947858/pexels-photo-7947858.jpeg?auto=compress&cs=tinysrgb&w=600"
+      title: 'Smart Calendar Sync',
+      description: 'Seamlessly integrates with your existing calendar apps. View all birthdays with beautiful visual indicators.',
+      image: 'https://images.pexels.com/photos/7947858/pexels-photo-7947858.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       icon: Bell,
-      title: "Intelligent Reminders",
-      description: "Custom timing with email, SMS, and push notifications. Never miss another important date.",
-      image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600"
+      title: 'Intelligent Reminders',
+      description: 'Custom timing with email, SMS, and push notifications. Never miss another important date.',
+      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       icon: Gift,
-      title: "AI Gift Suggestions",
-      description: "Personalized recommendations based on interests and history. Make every gift meaningful.",
-      image: "https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg?auto=compress&cs=tinysrgb&w=600"
+      title: 'AI Gift Suggestions',
+      description: 'Personalized recommendations based on interests and history. Make every gift meaningful.',
+      image: 'https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       icon: Users,
-      title: "Family Networks",
-      description: "Organize contacts into groups. Share birthday lists for coordinated celebrations.",
-      image: "https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=600"
+      title: 'Family Networks',
+      description: 'Organize contacts into groups. Share birthday lists for coordinated celebrations.',
+      image: 'https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       icon: Smartphone,
-      title: "Mobile First",
-      description: "Beautiful mobile experience with offline sync. Manage birthdays anywhere, anytime.",
-      image: "https://images.pexels.com/photos/887751/pexels-photo-887751.jpeg?auto=compress&cs=tinysrgb&w=600"
+      title: 'Mobile First',
+      description: 'Beautiful mobile experience with offline sync. Manage birthdays anywhere, anytime.',
+      image: 'https://images.pexels.com/photos/887751/pexels-photo-887751.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       icon: Zap,
-      title: "Quick Actions",
-      description: "Send wishes instantly through social media, SMS, or email with smart templates.",
-      image: "https://images.pexels.com/photos/1303081/pexels-photo-1303081.jpeg?auto=compress&cs=tinysrgb&w=600"
-    }
+      title: 'Quick Actions',
+      description: 'Send wishes instantly through social media, SMS, or email with smart templates.',
+      image: 'https://images.pexels.com/photos/1303081/pexels-photo-1303081.jpeg?auto=compress&cs=tinysrgb&w=600',
+    },
   ];
 
   return (
