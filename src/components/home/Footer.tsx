@@ -1,7 +1,6 @@
-import React from 'react';
 import { Calendar, Mail, Phone, MapPin, Twitter, Github, Linkedin, Youtube } from 'lucide-react';
 
-const Footer = () => {
+function Footer() {
   const socialLinks = [
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Github, href: "#", label: "GitHub" },
@@ -31,9 +30,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-950 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-          {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -64,7 +61,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Footer Links */}
           {footerSections.map((section, index) => (
             <div key={index} className="space-y-4">
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider">{section.title}</h3>
@@ -84,7 +80,6 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Newsletter Section */}
         <div className="py-8 border-t border-gray-800">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -107,7 +102,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <div className="py-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-gray-400 text-sm">
             © 2025 BirthdayTracker. All rights reserved.
@@ -129,6 +123,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
-export default Footer;
+export { Footer };

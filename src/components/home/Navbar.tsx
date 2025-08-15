@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
 
-const Navbar = () => {
+function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -35,7 +35,6 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">
               Features
@@ -59,7 +58,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
@@ -68,7 +66,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-gray-950/95 backdrop-blur-xl border-t border-gray-800/50">
             <div className="px-6 py-4 space-y-4">
@@ -95,6 +92,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
-export default Navbar;
+export { Navbar };

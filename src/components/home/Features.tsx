@@ -1,7 +1,6 @@
-import React from 'react';
 import { Calendar, Bell, Gift, Users, Smartphone, Zap } from 'lucide-react';
 
-const Features = () => {
+function Features() {
   const features = [
     {
       icon: Calendar,
@@ -43,7 +42,6 @@ const Features = () => {
 
   return (
     <section id="features" className="py-24 bg-gray-950 relative">
-      {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
@@ -93,6 +91,6 @@ const Features = () => {
       </div>
     </section>
   );
-};
+}
 
-export default Features;
+export { Features };
