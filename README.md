@@ -14,7 +14,7 @@ The application is built with modern web technologies and provides a clean, resp
 
 ## Technologies Used
 
-- **Frontend**: Next.js 15, React 19, TailwindCSS
+- **Frontend**: Next.js 16, React 19, TailwindCSS
 - **Authentication**: Clerk
 - **Database**: NeonDB (PostgreSQL) with Drizzle ORM
 - **UI Components**: shadcn/ui, Radix UI, React Day Picker
