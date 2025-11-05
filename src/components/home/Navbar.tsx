@@ -1,26 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
 
 function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-gray-950/80 backdrop-blur-xl border-b border-gray-800/50' 
-        : 'bg-transparent backdrop-blur-sm'
-    }`}>
+    <nav className="fixed w-full z-50 transition-all duration-300 bg-gray-950/60 backdrop-blur-xl border-b border-gray-800/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
@@ -46,9 +33,9 @@ function Navbar() {
               FAQ
             </a>
             <div className="flex items-center space-x-3">
-              <button className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">
+              <a href="/birthdays" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">
                 Sign in
-              </button>
+              </a>
               <button className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity duration-200"></div>
                 <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">

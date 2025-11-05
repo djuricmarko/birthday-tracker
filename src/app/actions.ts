@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { addBirthday, deleteBirthday } from '~/services/birthday';
 import { auth } from '@clerk/nextjs/server';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 interface FormState {
   message: string;
